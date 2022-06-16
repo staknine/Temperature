@@ -17,6 +17,7 @@ defmodule TemperatureWeb.Router do
   scope "/", TemperatureWeb do
     pipe_through :browser
 
+    live "/temperature", CalculatorLive
     get "/", PageController, :index
   end
 
