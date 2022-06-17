@@ -6,7 +6,7 @@ defmodule TemperatureWeb.CalculatorLive do
   alias __MODULE__.Form
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, temperature: %{value: "0"})}
+    {:ok, assign(socket, temperature: %{value: "0", scale: :celsius})}
   end
 
   def handle_info({:updated_temperature, temperature}, socket) do
@@ -17,8 +17,14 @@ defmodule TemperatureWeb.CalculatorLive do
     ~H"""
     <div> 
       <.live_component module={TemperatureWeb.CalculatorLive.Form}
-        id="temperature-form" 
-        temperature={@temperature} />
+        id="celsius-form" 
+        temperature={@temperature}  
+        scale={:celsius}/>
+
+      <.live_component module={TemperatureWeb.CalculatorLive.Form}
+        id="fahrenheit-form" 
+        temperature={@temperature}  
+        scale={:fahrenheit}/>
 
       <Component.boiling_verdict temperature={@temperature} /> 
     </div>
