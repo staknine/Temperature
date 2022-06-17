@@ -3,6 +3,7 @@ defmodule TemperatureWeb.CalculatorLive do
   use Phoenix.HTML
 
   alias __MODULE__.Component
+  alias __MODULE__.Form
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, temperature: %{value: "0"})}
@@ -17,17 +18,10 @@ defmodule TemperatureWeb.CalculatorLive do
   def render(assigns) do
     ~H"""
     <div> 
-      <fieldset>
-      <legend>Enter temperature in Celsius:</legend>
-        <.form
-          let={f} 
-          for={:temperature} 
-          id="temperature-form" 
-          phx-change="change" 
-        >
-          <%= number_input f, :value, value: @temperature.value %> 
-        </.form>
-      </fieldset>
+      <.live_component module={TemperatureWeb.CalculatorLive.Form}
+        id="temperature-form" 
+        temperature={@temperature} />
+
       <Component.boiling_verdict temperature={@temperature} /> 
     </div>
     """
