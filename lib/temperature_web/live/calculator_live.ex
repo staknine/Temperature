@@ -9,9 +9,7 @@ defmodule TemperatureWeb.CalculatorLive do
     {:ok, assign(socket, temperature: %{value: "0"})}
   end
 
-  def handle_event("change", %{"temperature" => temperature_params}, socket) do
-    temperature = %{value: temperature_params["value"]}
-
+  def handle_info({:updated_temperature, temperature}, socket) do
     {:noreply, assign(socket, :temperature, temperature)}
   end
 
