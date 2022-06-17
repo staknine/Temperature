@@ -13,7 +13,11 @@ defmodule TemperatureWeb.CalculatorLive.Component do
 
   def would_boil?(%{value: ""}), do: false
 
-  def would_boil?(temperature) do
+  def would_boil?(%{scale: :celsius} = temperature) do
     String.to_integer(temperature.value) >= 100
+  end
+
+  def would_boil?(%{scale: :fahrenheit} = temperature) do
+    String.to_integer(temperature.value) >= 212
   end
 end
